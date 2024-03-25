@@ -1,6 +1,7 @@
 let listaNumerosGerados=[];
 let nMaximo=100;
 let tentativas=1;
+let imagemOriginal;
 
 let numeroSecreto=gerarNumeroAleatorio();
 function gerarNumeroAleatorio(){
@@ -16,7 +17,12 @@ function gerarNumeroAleatorio(){
         return numeroGerado
     }
 }
-
+function alterarImagem(){
+    let imagem=document.querySelector(`.container__imagem-interrogacao`);
+    imagemOriginal=imagem.src
+    imagem.src=`./img/check.png`;
+    imagem.alt=`imagem de check`;
+}
 function campo(tag, texto){
     let paragrafo=document.querySelector(tag);
     paragrafo.innerHTML=texto;
@@ -39,6 +45,7 @@ function verificarChute(){
         campo(`h1`,`Voce acertou usando ${tentativas} ${textoTentativas}!`);
         campo(`p`,`O numero era mesmo ${numeroSecreto}`);
         document.getElementById(`reiniciar`).removeAttribute(`disabled`);
+        alterarImagem();
     }else if(chute>numeroSecreto){
         campo(`p`,`O numero e menor ↓`);
     }else{
@@ -52,4 +59,5 @@ function reiniciarJogo(){
     recarregaTextoPagina();
     tentativas=1; 
     document.getElementById(`reiniciar`).setAttribute(`disabled`,true);
+    document.querySelector(`.container__imagem-interrogacao`).src=`./img/interrogacao.png`;
     }
