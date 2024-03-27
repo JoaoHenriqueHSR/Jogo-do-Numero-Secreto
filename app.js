@@ -54,6 +54,12 @@ function verificarChute(){
     tentativas+=1;
     limparTexto();
 }
+document.addEventListener('keydown', function(event) {
+    if (event.keyCode === 13) {
+        verificarChute();
+    }
+});
+
 function reiniciarJogo(){
     numeroSecreto=gerarNumeroAleatorio();
     recarregaTextoPagina();
